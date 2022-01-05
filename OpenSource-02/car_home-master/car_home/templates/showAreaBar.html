@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算二手车的使用时间</title>
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/vintage.js"></script>
+</head>
+<body>
+<div class="cart" style="width: 800px;height: 600px;margin: auto"></div>
+
+<script>
+    var MyCharts = echarts.init(document.querySelector('.cart'),'vintage')
+    var area = {{ area|tojson }}
+    var count = {{ count|tojson }}
+
+    var option = {
+        title:{
+            text:'二手车的使用时间',
+            textStyle:{
+                fontSize:21,
+                fontFamily:'楷体'
+            }
+        },
+        xAxis:{
+            type:'category',
+            data:area,
+            axisLabel:{
+                interval:0,
+                rotate:30,
+                margin:10
+            }
+        },
+        legend:{
+            name:['汽车品牌']
+        },
+        yAxis:{
+            type:'value',
+            scale:true
+        },
+        tooltip:{
+            tigger:'item',
+            triggerOn:'mousemove',
+            formatter:function(arg)
+            {
+                return '年限：'+arg.name+"<br>"+'数量：'+arg.value
+            }
+        },
+        series:[
+            {
+                type:'bar',
+                data:count,
+                name:'汽车品牌',
+                label:{
+                    show:true,
+                    position:'top',
+                    rotate: 30,
+                    distance:15
+                },
+                barWidth:'40%',
+                showBackground:true,
+                backgroundStyle: {
+                    color:'rgba(180,180,180,0.2)'
+                }
+            }
+        ]
+    }
+    MyCharts.setOption(option)
+
+</script>
+</body>
+</html>

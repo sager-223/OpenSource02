@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算不同品牌的数量的前十名</title>
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/vintage.js"></script>
+</head>
+<body>
+<div class="cart" style="height: 600px;width: 800px;margin: auto"></div>
+<script>
+    var MyCharts = echarts.init(document.querySelector('.cart'),'vintage')
+    var brand = {{ brand|tojson }}
+    var count = {{ count|tojson }}
+
+    var option = {
+        title:{
+            text:'不同品牌的数量的前十名',
+            textStyle:{
+                fontSize:21,
+                fontFamily:'楷体'
+            },
+            left:10,
+            top:10
+        },
+        xAxis:{
+            type:'category',
+            data:brand,
+            axisLabel:{
+                interval:0,
+                rotate:30,
+                margin:20
+            }
+        },
+        legend:{
+            name:['汽车品牌']
+        },
+        yAxis:{
+            type:'value',
+            scale:true
+        },
+        tooltip:{
+            trigger:'item',
+            triggerOn: 'mousemove',
+            formatter:function(arg)
+            {
+                return '品牌：'+arg.name+'<br>'+'数量：'+arg.value
+            }
+        },
+        series:[
+            {
+                type:'bar',
+                data:count,
+                name:'汽车品牌',
+                label:{
+                    show:true,
+                    position:'top',
+                    rotate: true
+                },
+                showBackground:true,
+                backgroundStyle: {
+                    color:'rgba(180,180,180,0.2)'
+                }
+            }
+        ]
+    }
+    MyCharts.setOption(option)
+
+</script>
+</body>
+</html>

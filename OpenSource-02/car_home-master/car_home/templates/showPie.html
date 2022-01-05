@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算不同地区的二手车数量</title>
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/vintage.js"></script>
+</head>
+<body>
+<div class="cart" style="width: 800px;height: 600px;margin: auto"></div>
+<script>
+    var MyCharts = echarts.init(document.querySelector('.cart'),'vintage')
+    var data = {{ data|tojson }}
+    var option = {
+        title:{
+            text:'不同地区的二手车数量',
+            textStyle:{
+                fontSize:21,
+                fontFamily:'楷体'
+            },
+            left:10,
+            top:10
+        },
+        legend:{
+            name:['地区'],
+            left:10,
+            bottom:10,
+            orient:'vertical'
+        },
+        tooltip:{
+            trigger:'item',
+            triggerOn:'mousemove',
+            formatter:function (arg)
+            {
+                return '地区：'+arg.name+"<br>"+"数量："+arg.value+"<br>"+"占比："+arg.percent+"%"
+            }
+        },
+        series:[
+            {
+                type:'pie',
+                data:data,
+                name:'使用时间',
+                label:{
+                    show:true
+                },
+                radius:['50%','80%'],
+                {#roseType:'radius'#}
+                itemStyle:{
+                    borderWidth:2,
+                    borderRadius:10,
+                    borderColor:'#fff'
+                },
+                selectedMode:'multiple',
+                selectedOffset:20
+            }
+        ]
+    }
+    MyCharts.setOption(option)
+</script>
+</body>
+</html>

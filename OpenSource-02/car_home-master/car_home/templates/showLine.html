@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算每个月的二手车数量</title>
+    <script src="../static/js/echarts.min.js"></script>
+    <script src="../static/js/vintage.js"></script>
+</head>
+<body>
+<div class="cart" style="width: 800px;height: 600px;margin: auto"></div>
+<script>
+    var MyCharts = echarts.init(document.querySelector('.cart'),'vintage')
+    var month = {{ month|tojson }}
+    var count = {{ count|tojson }}
+    var option = {
+        title:{
+            text:'每个月的二手车发布数量',
+            textStyle:{
+                fontSize:21,
+                fontFamily:'楷体'
+            },
+            left:10,
+            top:10
+        },
+        xAxis:{
+            type:'category',
+            data:month,
+            axisLabel:{
+                interval:0,
+                rotate:30,
+                margin:20
+            }
+        },
+        legend:{
+            name:['数量']
+        },
+        tooltip:{
+            trigger:'axis',
+            triggerOn:'mousemove',
+            formatter:function(arg){
+                return '月份：'+arg[0].name+'月'+"<br>"+'数量：'+arg[0].value
+            }
+        },
+        yAxis:{
+            type:'value',
+            scale:true
+        },
+        series:[
+            {
+                type:'line',
+                name:'数量',
+                data:count,
+                label:{
+                    show:true
+                },
+                showBackground:true,
+                backgroundStyle:{
+                    color:'rgba(180,180,180,0.2)'
+                },
+                markPoint:{
+                    data:[
+                        {
+                            name:'最大值',
+                            type:'max',
+                            symbolSize:[40,40],
+                            symbolOffset:[0,-20],
+                            label:{
+                                show: true,
+                                formatter:function (arg)
+                                {
+                                    return arg.name
+                                }
+                            }
+                        },
+                        {
+                            name:'最小值',
+                            type:'min',
+                            symbolSize:[40,40],
+                            symbolOffset:[0,-20],
+                            label:{
+                                show: true,
+                                formatter:function (arg)
+                                {
+                                    return arg.name
+                                }
+                            }
+                        }
+                    ]
+                },
+                markLine:{
+                    data:[
+                        {
+                            type:"average",
+                            name:'平均值',
+                            label:{
+                                show:true,
+                                formatter:function(arg)
+                                {
+                                    return arg.name+':\n'+arg.value
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+    MyCharts.setOption(option)
+</script>
+</body>
+</html>

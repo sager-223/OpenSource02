@@ -1,0 +1,6 @@
+3
+^d`f  ?               @   s>   G d d? de ?ZG dd? de?ZG dd? de?Zeed?ZdS )c               @   s   e Zd ZdZdZdZdS )?ConfigZmsqaidyq1314z+mysql://root:123456@localhost:3306/car_homeTN)?__name__?__module__?__qualname__?SECRET_KEY?SQLALCHEMY_DATABASE_URI?SQLALCHEMY_TRACK_MODIFICATIONS? r   r   ?   C:\Users\20193\Desktop\Python学习\car_home\config.pyr      s   r   c               @   s   e Zd ZdZdS )?DevelopmentConfigTN)r   r   r   ?DEBUGr   r   r   r	   r
+      s   r
+   c               @   s   e Zd ZdS )?ProductConfigN)r   r   r   r   r   r   r	   r   
+   s   r   )?develop?productN)?objectr   r
+   r   ?config_mapr   r   r   r	   ?<module>   s   

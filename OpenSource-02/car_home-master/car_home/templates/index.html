@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>汽车之家可视化分析</title>
+    <style>
+        ul{
+            width: 800px;
+            height: 600px;
+            {#list-style: none;#}
+            line-height: 60px;
+            padding: 40px;
+            margin: auto;
+        }
+        ul li{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><a href="{{ url_for('api_1_0.showBrandBar') }}"><h3>计算不同品牌的数量的前十名</h3></a></li>
+    <li><a href="{{ url_for('api_1_0.showPie') }}"><h3>计算不同地区的二手车数量</h3></a></li>
+    <li><a href="{{ url_for('api_1_0.showAreaBar') }}"><h3>计算车二手车的使用时间</h3></a></li>
+    <li><a href="{{ url_for('api_1_0.showLine') }}"><h3>计算每个月发布的二手车数量</h3></a></li>
+</ul>
+</body>
+</html>
